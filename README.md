@@ -16,7 +16,7 @@ Jak ją otworzyć: na ekranie rozmowy podpowiedź „Chcę zmienić oznaczenie p
 2. **Imię**: opcjonalna zmiana w tej samej sprawie, za jedną opłatą.
 3. **Oświadczenie i podpis Face ID**. Osoba stanu wolnego składa je do USC; osoba w związku małżeńskim
    (Marta, Jan, Ewa) do sądu, a małżonek jest uczestnikiem (projekt art. 36c). Kacper pokazuje ścieżkę bez sądu.
-4. **3 miesiące na namysł** (albo postanowienie sądu) i potwierdzenie. W pokazie można przejść od razu do tego dnia.
+4. **30 dni na namysł** (albo postanowienie sądu) i potwierdzenie. W pokazie można przejść od razu do tego dnia.
 5. **Wpis**: nowy PESEL z poprawną cyfrą kontrolną (przy X numer się nie zmienia), karty w portfelu pokazują nowe dane.
 6. **Dalsze kroki**: dowód osobisty, paszport, prawo jazdy, zmiana imienia, powiadomienie ZUS, NFZ, urzędu skarbowego
    i pracodawcy, nowe świadectwa i dyplomy, odpis aktu urodzenia.

@@ -1,5 +1,5 @@
 /* ---------- Oznaczenie płci: usługa projektowana (wymaga zmiany ustawy, patrz README) ----------
-   Jeden przełącznik K | M | X i jedno oświadczenie. Osoba stanu wolnego: wniosek do USC, 3 miesiące na namysł,
+   Jeden przełącznik K | M | X i jedno oświadczenie. Osoba stanu wolnego: wniosek do USC, 30 dni na namysł,
    potwierdzenie. Osoba w związku małżeńskim: wniosek do sądu z udziałem małżonka (projekt art. 36c PASC).
    Po wpisie aplikacja proponuje dalsze kroki: dokumenty, imię, instytucje, świadectwa. Dane fikcyjne. */
 const PLEC_LABEL={K:'Kobieta',M:'Mężczyzna',X:'Niebinarna (X)'};
@@ -66,13 +66,13 @@ const SP={
    await say(`Jesteś w związku małżeńskim, więc w projekcie ustawy zmianę zatwierdza sąd, a ${malz.includes('żona')?'żona':'mąż'} jest uczestnikiem sprawy. Wniosek przygotuję i złożę stąd.`);
    rows.push(['Tryb','sąd rejonowy, postępowanie nieprocesowe'],['Uczestnik',malz],['Opłata','37 zł, razem ze zmianą imienia']);
   }else{
-   rows.push(['Urząd',plecUSC()],['Czas na namysł','3 miesiące, potem potwierdzasz'],['Opłata','37 zł, razem ze zmianą imienia']);
+   rows.push(['Urząd',plecUSC()],['Czas na namysł','30 dni, potem potwierdzasz'],['Opłata','37 zł, razem ze zmianą imienia']);
   }
   await confirmCard({icon:'id',title:'Oświadczenie o zmianie oznaczenia płci',source:'Rejestr PESEL, rejestr stanu cywilnego · '+PLEC_ZRODLO,
    body:`Oświadczam, że moja tożsamość płciowa trwale odpowiada oznaczeniu „${PLEC_LABEL[g]}”.`,rows,
    note:'Oświadczenie składasz pod rygorem odpowiedzialności karnej za fałszywe oświadczenie. Do wpisu możesz je wycofać.',
    label:'Podpisz i wyślij',then:async()=>{
-    PLEC.wniosek={nr:'OP/2026/'+(400+Math.floor(Math.random()*500))+' '+(100+Math.floor(Math.random()*900)),sad:!!malz,od:dataMies(3),do:dataMies(6)};
+    PLEC.wniosek={nr:'OP/2026/'+(400+Math.floor(Math.random()*500))+' '+(100+Math.floor(Math.random()*900)),sad:!!malz,od:dPlus(30),do:dataMies(6)};
     if(malz){
      await result({title:'Wniosek złożony w sądzie',source:'Twoje sprawy',rows:[['Numer sprawy',PLEC.wniosek.nr],['Sąd','sąd rejonowy, '+plecMiasto()],['Uczestnik',malz+', dostał powiadomienie w mObywatelu'],['Dalej','postanowienie doręczymy do Twojej skrzynki']]});
     }else{
@@ -83,8 +83,8 @@ const SP={
  },
  async czeka(){
   const w=PLEC.wniosek;
-  await say(w.sad?'Dam Ci znać, gdy sąd wyda postanowienie. W pokazie możesz przejść od razu do tego dnia.':'Przypomnę Ci o potwierdzeniu za 3 miesiące. W pokazie możesz przejść od razu do tego dnia.');
-  chips([{label:w.sad?'Przejdź do postanowienia (pokaz)':'Przewiń o 3 miesiące (pokaz)',go:w.sad?SP.postanowienie:SP.potwierdz},
+  await say(w.sad?'Dam Ci znać, gdy sąd wyda postanowienie. W pokazie możesz przejść od razu do tego dnia.':'Przypomnę Ci o potwierdzeniu za 30 dni. W pokazie możesz przejść od razu do tego dnia.');
+  chips([{label:w.sad?'Przejdź do postanowienia (pokaz)':'Przewiń o 30 dni (pokaz)',go:w.sad?SP.postanowienie:SP.potwierdz},
    {label:'Wycofaj wniosek',go:SP.wycofaj}]);
  },
  async wycofaj(){
@@ -92,7 +92,7 @@ const SP={
   await result({title:'Wniosek wycofany',source:'Twoje sprawy',rows:[['Oznaczenie płci','bez zmian']]});
  },
  async potwierdz(){
-  await say('Minęły 3 miesiące. Potwierdzić zmianę? Kolejną zgłosisz najwcześniej za rok.');
+  await say('Minęło 30 dni. Potwierdzić zmianę? Kolejną zgłosisz najwcześniej za rok.');
   await confirmCard({icon:'id',title:'Potwierdzenie zmiany oznaczenia płci',source:plecUSC()+' · '+PLEC_ZRODLO,rows:[['Nowe oznaczenie',PLEC_LABEL[PLEC.nowa]],['Imię i nazwisko',plecPelne()],['Numer sprawy',PLEC.wniosek.nr]],label:'Potwierdź zmianę',then:SP.wpis,onCancel:async()=>{await say('Nic nie zmieniłem. Wniosek czeka do '+PLEC.wniosek.do+'.');chips([{label:'Wycofaj wniosek',go:SP.wycofaj}])}});
  },
  async postanowienie(){
