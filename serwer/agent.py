@@ -431,6 +431,9 @@ def _run(messages, stan, confirm, keys, log, osoba):
             elif n == 'pokaz_dokument':
                 events.append(dict(t='doc', id={'dowod': 'dowod', 'prawo_jazdy': 'pj', 'kdr': 'kdr', 'pojazd': 'auto', 'legitymacja': 'leg'}.get(a.get('dokument'), 'dowod')))
                 wyniki.append({'type': 'tool_result', 'tool_use_id': b['id'], 'content': 'Dokument wyświetlony z przyciskiem Potwierdź swoje dane.'})
+            elif n == 'oznaczenie_plci':
+                events.append(dict(t='plec'))
+                wyniki.append({'type': 'tool_result', 'tool_use_id': b['id'], 'content': 'Formularz Oznaczenie płci jest otwarty i sam prowadzi sprawę. Nie dodawaj pytań ani przycisków; najwyżej jedno krótkie zdanie.'})
             elif n in NAZWY_KLIENT:
                 events.append(dict(t='qrflow', id=b['id'], mode='scan' if n == 'przekaz_dane' else 'show', cel=a.get('cel') or 'tozsamosc', kto=a.get('kto'), dok=a.get('dokument')))
                 czeka = 'qr'

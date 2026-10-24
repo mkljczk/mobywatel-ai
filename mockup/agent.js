@@ -45,6 +45,7 @@ async function renderEvents(evs,voice){
   else if(e.t==='card'){await info(e)}
   else if(e.t==='qr'){await card(`<div class="ui">${hd('qr',e.title)}<div class="qr">${qrSVG(11)}<div class="code">${e.code}</div></div></div>`);if(e.after){await sleep(1400);await info(e.after)}}
   else if(e.t==='doc'){await S.docShow(e.id)}
+  else if(e.t==='plec'){await S.plec()}
   else if(e.t==='chips'){chips(e.opcje.map(o=>({label:o,go:()=>agentSend(o,{chip:true})})),true);if(e.mow)speak.push(e.mow)}
   else if(e.t==='multi'){multi(e.opcje,sel=>agentSend(sel.join(', '),{chip:true}),true);if(e.mow)speak.push(e.mow)}
   else if(e.t==='qrflow'){qrEv=e}
@@ -187,7 +188,7 @@ async function initAgent(){
  try{const r=await fetch('/api/health',{cache:'no-store'});const j=await r.json();AGENT=!!j.agent;window.AGENT_INFO=j}catch(e){AGENT=false}
  if(!AGENT)return;
  app.dataset.agent='1';
- route=t=>agentSend(t);
+ route=t=>{if((pending&&pending.plec)||(!pending&&typeof jestPlec==='function'&&jestPlec(t)))return scriptRoute(t);return agentSend(t)};   // Oznaczenie płci: formularz z plec.js
  startTopic=function(t){if(VIS.title)newConv();enterChat();act(()=>{addUser(t);route(t)})};
  $('#mic').onclick=()=>enterVoice();
  $('#vmic').onclick=vmicTap;

@@ -618,3 +618,24 @@ html:not([lang="pl"]) .rsum small,html:not([lang="pl"]) .tl em,html:not([lang="p
 html:not([lang="pl"]) .quick button,html:not([lang="pl"]) .chips button,html:not([lang="pl"]) .qbtn{overflow-wrap:break-word;hyphens:auto;-webkit-hyphens:auto}
 html:not([lang="pl"]) .quick{gap:6px;margin-left:0;margin-right:0}
 html:not([lang="pl"]) .quick button{flex:1 1 0;width:auto;min-width:0;font-size:12px;line-height:15px}
+
+/* ---------- Oznaczenie płci (plec.js): jeden przełącznik K | M | X ---------- */
+.ui.plec .seg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin:0 16px 10px;padding:4px;border-radius:14px;background:var(--bg)}
+.ui.plec .seg button{display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:11px;padding:10px 4px 8px;font-size:18px;font-weight:700;line-height:20px;color:var(--ink);text-align:center}
+.ui.plec .seg button small{display:block;font-size:12px;font-weight:500;color:var(--ink2);margin-top:2px}
+.ui.plec .seg button em{font-style:normal;font-size:10.5px;line-height:14px;font-weight:600;color:var(--ink3);margin-top:1px}
+.ui.plec .seg button[aria-checked="true"]{background:var(--surface);color:var(--red);box-shadow:0 1px 3px rgba(15,25,60,.16)}
+.ui.plec .seg button[aria-checked="true"] small{color:var(--red-dark)}
+.ui.plec .pnote{margin:0 16px 10px}
+.ui.plec .pn{padding:10px 12px;border-radius:12px;background:var(--bg);font-size:13.5px;line-height:19px;color:var(--ink2)}
+.ui.plec .pn b{color:var(--ink);font-weight:600}
+.ui.plec .pn ul{margin:4px 0 0;padding-left:18px}
+.ui.plec.done .seg button:not([aria-checked="true"]){opacity:.45}
+.ui.plec.done .seg{pointer-events:none}
+.btn.primary:disabled{opacity:.4;cursor:default}
+
+/* informacja o charakterze prototypu: zawsze widoczna */
+.proto{position:fixed;top:0;left:0;right:0;z-index:200;padding:6px 12px;text-align:center;font:500 12.5px/16px var(--sans);color:#fff;background:#16171a}
+.proto b{font-weight:700}
+.proto .ps{display:none}
+@media (max-width:520px){.proto{position:static;height:22px;font-size:11px;line-height:14px;padding:4px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.proto .pl{display:none}.proto .ps{display:inline}.phone{height:calc(100dvh - 22px)}}

@@ -96,6 +96,7 @@ UI = [
       {'opcje': S('array', items=S(), d='krótkie etykiety, maks. 4 słowa')}, ['opcje']),
     T('wybor_wielokrotny', 'Pokazuje listę do zaznaczenia kilku pozycji (np. co było w portfelu) z przyciskiem Dalej. Po tym czekasz na odpowiedź.',
       {'opcje': S('array', items=S())}, ['opcje']),
+    T('oznaczenie_plci', 'Otwiera w aplikacji formularz „Oznaczenie płci” (usługa projektowana w tym prototypie, wymaga zmiany ustawy): jeden przełącznik K, M lub X, oświadczenie, zmiana imienia i dalsze kroki. Wywołaj od razu, gdy ktoś chce zmienić oznaczenie płci w dokumentach, mówi o tranzycji albo o oznaczeniu niebinarnym. Nie pytaj o powody i nie oceniaj.'),
     T('pokaz_dokument', 'Wyświetla dokument z portfela w rozmowie.', {'dokument': S(e=['dowod', 'prawo_jazdy', 'kdr', 'pojazd', 'legitymacja'])}, ['dokument']),
     T('zakoncz_rozmowe', 'Kończy rozmowę i wraca na ekran główny aplikacji (w rozmowie głosowej wyłącza mikrofon). Wywołaj, gdy użytkowniczka żegna się albo mówi, że to wszystko i nie ma więcej spraw, po krótkim pożegnaniu w tekście.'),
 ]

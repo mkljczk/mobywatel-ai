@@ -1,5 +1,36 @@
 # mObywatel.ai: pełna wersja prototypu do uruchomienia u siebie
 
+> **Ta paczka zawiera dodatkową funkcję zgłoszoną do mObywatel Challenge: „Oznaczenie płci”.**
+> To usługa projektowana: w obecnym stanie prawnym jej nie ma, a działałaby dopiero po zmianie ustawy
+> (projekt nowego art. 36a–36d Prawa o aktach stanu cywilnego i zmian w powiązanych ustawach, opisany w dokumencie zgłoszenia).
+> Jak cały prototyp, **nie jest to prawdziwa usługa rządowa** ani aplikacja mObywatel. Osoby i dane są fikcyjne.
+> Informacja o tym jest stale widoczna na górze ekranu aplikacji.
+
+## Funkcja „Oznaczenie płci”
+
+Jak ją otworzyć: na ekranie rozmowy podpowiedź „Chcę zmienić oznaczenie płci” albo dowolna prośba ze słowami
+„płeć”, „oznaczenie płci”, „tranzycja”, „niebinarna”. Działa w trybie skryptowym (bez kluczy API) i z asystentem
+(narzędzie `oznaczenie_plci` w `serwer/narzedzia.py`).
+
+1. **Jeden przełącznik K | M | X** z obecnym wpisem z rejestru PESEL i opisem skutków każdego wyboru.
+2. **Imię**: opcjonalna zmiana w tej samej sprawie, za jedną opłatą.
+3. **Oświadczenie i podpis Face ID**. Osoba stanu wolnego składa je do USC; osoba w związku małżeńskim
+   (Marta, Jan, Ewa) do sądu, a małżonek jest uczestnikiem (projekt art. 36c). Kacper pokazuje ścieżkę bez sądu.
+4. **3 miesiące na namysł** (albo postanowienie sądu) i potwierdzenie. W pokazie można przejść od razu do tego dnia.
+5. **Wpis**: nowy PESEL z poprawną cyfrą kontrolną (przy X numer się nie zmienia), karty w portfelu pokazują nowe dane.
+6. **Dalsze kroki**: dowód osobisty, paszport, prawo jazdy, zmiana imienia, powiadomienie ZUS, NFZ, urzędu skarbowego
+   i pracodawcy, nowe świadectwa i dyplomy, odpis aktu urodzenia.
+
+Zmienione pliki: `mockup/plec.js` (nowy), `mockup/index.html` (pasek „to nie jest prawdziwa usługa rządowa”,
+dołączenie skryptu), `mockup/style.css` (przełącznik i pasek), `mockup/agent.js` (obsługa w trybie asystenta),
+`serwer/narzedzia.py` i `serwer/agent.py` (narzędzie `oznaczenie_plci`).
+
+Do pokazu wystarczy sam katalog `mockup/` umieszczony na dowolnym hostingu plików statycznych: bez serwera
+aplikacja działa w trybie skryptowym. Osobę wybiera się parametrem `?osoba=kacper` (ścieżka przez USC)
+albo `?osoba=marta` (ścieżka przez sąd).
+
+## Prototyp bazowy
+
 To prototyp aplikacji, w której zamiast menu i formularzy jest asystent AI: rozmawiasz z nim tekstem albo głosem,
 a on sprawdza dane w (fikcyjnych) rejestrach i załatwia sprawy, każdą czynność potwierdzasz na karcie.
 Wersja na stronie mobywatel.ai działa bez asystenta AI (scenariusze ze skryptu). Ta paczka zawiera pełną wersję:
